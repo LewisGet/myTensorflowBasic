@@ -24,7 +24,7 @@ init = tf.initialize_all_variables()
 sess = tf.Session()
 sess.run(init)
 
-for i in range(1000):
+for i in range(10000):
     batch_xs, batch_ys = mnist.train.next_batch(100)
     sess.run(train_step, feed_dict={x: batch_xs, y_: batch_ys})
 
@@ -72,5 +72,12 @@ def myTest():
         ans = arrayToInt(think[0])
 
         print ("圖片 " + str(i) + ".jpg 是：" + str(ans))
+
+    for i in range(1, 6):
+        image = getImageArray("./test-full/" + str(i) + ".jpg")
+        think = sess.run(y, feed_dict={x: [image]})
+        ans = arrayToInt(think[0])
+
+        print ("圖片 Full " + str(i) + ".jpg 是：" + str(ans))
 
 myTest()
